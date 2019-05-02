@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sqlite'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +35,16 @@ return [
 
     'connections' => [
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'dsn' => 'mongodb+srv://admin:mongoAdmin@lf-cluster-vp0g9.mongodb.net/igdb?retryWrites=true',
+            'database' => 'igdb',
+        ],
+        'mongodb_conn' => [
+            'driver' => 'mongodb',
+            'dsn'=>'mongodb+srv://admin:mongoAdmin@lf-cluster-vp0g9.mongodb.net/test?retryWrites=true',
+            'database' => 'igdb',
+        ],
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
