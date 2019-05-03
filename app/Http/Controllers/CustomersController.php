@@ -43,7 +43,7 @@ class CustomersController extends Controller
             'firstName' => 'required',
             'lastName' => 'required',
             'title' => 'required',
-            'city' => 'required',
+            'city' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
             'birthday' => 'required|date_format:Y-m-d'
         ]);
 
