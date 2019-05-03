@@ -26,11 +26,19 @@ Route::get('/logout', 'LoginController@logout');
 // Route::post('/employees', 'EmployeesController@edit');
 
 Route::get('/customers', 'CustomersController@index');
-Route::get('/customers/{id}/edit', 'CustomersController@show');
-Route::post('/customers', 'CustomersController@edit');
+Route::get('/customers/new', 'CustomersController@create');
+Route::post('/customers/new', 'CustomersController@store');
+
+Route::middleware(['authenticated'])->group(function() {
+    Route::get('/customers/{id}/edit', 'CustomersController@show');
+    Route::get('/customers/{id}/delete', 'CustomersController@delete');
+    Route::post('/customers', 'CustomersController@edit');
+});
 
 Route::get('/test', 'TestsController@index');
 
 Route::get('/orders', 'OrdersController@index');
+Route::get('/orders/new', 'OrdersController@create');
+Route::post('/orders', 'OrdersController@store');
 
 Route::get('/shippers', 'ShippersController@index');

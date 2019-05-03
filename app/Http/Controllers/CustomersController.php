@@ -31,6 +31,41 @@ class CustomersController extends Controller
         ]);
     }
 
+    function create(Request $request) {
+        return view('customers.create');
+    }
+
+    function store(Request $request) {
+        $input = $request->all();
+
+        //validate
+        $validation = Validator::make($input, [
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'title' => 'required',
+            'city' => 'required',
+            'birthday' => 'required|date_format:Y-m-d'
+        ]);
+
+        if ($validation->fails()) {
+            return redirect('/customers/new')
+            ->withInput()
+            ->withErrors($validation);//return with errors if failed
+        }
+
+        //if passed, data is ok so insert into DB
+
+        DB::table('Customers')->insert([
+            'LastName' => $request->lastName,
+            'FirstName' => $request->firstName,
+            'Title' => $request->title,
+            'City' => $request->city,
+            'Birthday' => $request->birthday
+        ]);
+
+        return redirect('/customers');
+    }
+
     function edit(Request $request) {
 
         $input = $request->all();
@@ -38,8 +73,8 @@ class CustomersController extends Controller
         $validation = Validator::make($input, [
             'firstName' => 'required',
             'lastName' => 'required',
-            'title' => 'required|alpha',
-            'city' => 'alpha',
+            'title' => 'required',
+            'city' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
             'birthday' => 'required|date_format:Y-m-d'        
         ]);
 
@@ -62,5 +97,16 @@ class CustomersController extends Controller
         ]);
         
         return redirect('/customers');
+    }
+
+    function delete($id) {
+        $query = DB::table('Customers')
+            ->where('CustomerID', '=', $id);
+
+        $ordersCheck = DB::table('Orders')
+            ->where('CustomerID', '=', $id);
+
+        $query->delete();
+        $ordersCheck->delete();
     }
 }
