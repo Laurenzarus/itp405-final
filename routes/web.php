@@ -15,8 +15,8 @@ Route::get('/', 'CustomersController@index');
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/signup', 'SignUpController@index');
-Route::post('/signup', 'SignUpController@signup');
+Route::get('/signup', 'SignupController@index');
+Route::post('/signup', 'SignupController@signup');
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@login');
 Route::get('/logout', 'LoginController@logout');
