@@ -33,12 +33,14 @@ Route::middleware(['authenticated'])->group(function() {
     Route::get('/customers/{id}/edit', 'CustomersController@show');
     Route::get('/customers/{id}/delete', 'CustomersController@delete');
     Route::post('/customers', 'CustomersController@edit');
+    Route::get('/orders/new', 'OrdersController@create');
+    Route::post('/orders', 'OrdersController@store');
+    Route::get('/orders/{id}/delete', 'OrdersController@delete');
 });
 
 Route::get('/test', 'TestsController@index');
 
 Route::get('/orders', 'OrdersController@index');
-Route::get('/orders/new', 'OrdersController@create');
-Route::post('/orders', 'OrdersController@store');
+
 
 Route::get('/shippers', 'ShippersController@index');

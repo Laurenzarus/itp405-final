@@ -106,7 +106,9 @@ class CustomersController extends Controller
         $ordersCheck = DB::table('Orders')
             ->where('CustomerID', '=', $id);
 
-        $query->delete();
         $ordersCheck->delete();
+        $query->delete();
+
+        return redirect('/customers');
     }
 }

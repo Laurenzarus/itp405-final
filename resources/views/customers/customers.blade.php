@@ -25,7 +25,7 @@
             @endforeach
             @if(Auth::check())
             <div class='text-danger' style="font-weight: bolder; font-size: 20px;">
-                Be wary: Deleting Customers will also delete their corresponding orders.
+                NOTE: Be aware that deleting Customers will also delete their corresponding orders.
             </div>
             <div>
                 <a href="/customers/new">Add a new customer</a>

@@ -80,4 +80,15 @@ class OrdersController extends Controller
 
         return redirect('/orders');
     }
+
+    function delete($id) {
+
+        $query = DB::table('Orders')
+            ->where('OrderID', '=', $id);
+
+        //deletion
+        $query->delete();
+
+        return redirect('/orders');
+    }
 }

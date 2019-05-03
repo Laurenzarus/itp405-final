@@ -11,12 +11,17 @@
             @foreach ($orders as $row)
                 <li>
                     <span href='/orders/{{$row->OrderID}}/edit' style="color: black;">
-                        <span style="color: red;">{{$row->FirstName}} {{$row->LastName}}</span> 
+                        <span style="color: firebrick;">{{$row->FirstName}} {{$row->LastName}}</span> 
                         ordered <span style="color: blue;">{{$row->Item}}</span> ({{$row->Amount}}) on
                         <span style='color: green;'>{{$row->OrderDate}}</span>, which were shipped on 
                         <span style='color: purple;'>{{$row->ShippedDate}}</span> by 
                         <span style='color:chocolate;'>{{$row->CompanyName}}</span>.
                     </span>
+                    @if (Auth::check())
+                    <a style='color: red;' href='/orders/{{$row->OrderID}}/delete'>
+                        Delete this order
+                    </a>
+                @endif
                 </li>
             @endforeach
             @if(Auth::check())
